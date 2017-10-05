@@ -26,17 +26,6 @@ class HomeController extends Controller
         return view('index');
     }
 
-    public function fields(){
-        return view('fields');
-    }
-
-    public function homeNodes(){
-        return view('homeNodes');
-    }
-
-    public function leafNodes(){
-        return view('leafNodes');
-    }
 
     public function analysis(){
         return view('analysis');
