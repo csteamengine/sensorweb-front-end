@@ -11,20 +11,20 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->middleware('auth');
-
 Auth::routes();
+
+Route::get('/', 'Auth\LoginController@index')->name('index');
+
+Route::get('home', 'HomeController@home')->name('home');
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('fields', 'FieldController@fields')->name('fields');
-Route::get('fields/add', 'FieldController@addField')->name('addField');
+Route::post('fields/add', 'FieldController@addField')->name('addField');
 Route::get('fields/remove', 'FieldController@removeField')->name('removeField');
 
 Route::get('homeNodes', 'NodeController@homeNodes')->name('homeNodes');
-Route::get('homeNodes/add', 'NodeController@addHomeNode')->name('addHomeNodes');
+Route::post('homeNodes/add', 'NodeController@addHomeNode')->name('addHomeNode');
 Route::get('homeNodes/remove', 'NodeController@removeHomeNode')->name('removeHomeNode');
 
 Route::get('leafNodes', 'NodeController@leafNodes')->name('leafNodes');

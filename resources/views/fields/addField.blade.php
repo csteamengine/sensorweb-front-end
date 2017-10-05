@@ -3,18 +3,18 @@
  * Created by PhpStorm.
  * User: gregory
  * Date: 10/4/17
- * Time: 6:56 PM
+ * Time: 6:54 PM
  */
 ?>
 
 @extends('layouts.layout')
 
-@section('title', 'Home Nodes')
+@section('title', 'Field')
 
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Home Nodes</h1>
+            <h1 class="page-header">Field</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>

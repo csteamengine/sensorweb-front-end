@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'id', 'name', 'email', 'password',
     ];
 
     /**
@@ -26,4 +26,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function homenodes(){
+        return $this->belongsToMany('SensorWeb\Models\Homenode', 'user_homenodes', 'user_id', 'homenode_id');
+    }
 }

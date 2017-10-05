@@ -1,11 +1,12 @@
 <?php
 
-namespace SensorWeb;
+namespace SensorWeb\Models;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class LeafNode extends Authenticatable
+class Leafnode extends Model
 {
     use Notifiable;
 

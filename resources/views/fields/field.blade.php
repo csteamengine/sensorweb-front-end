@@ -9,12 +9,12 @@
 
 @extends('layouts.layout')
 
-@section('title', 'Fields')
+@section('title', 'Field')
 
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Fields</h1>
+            <h1 class="page-header">Field</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
