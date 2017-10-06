@@ -19,7 +19,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Home Nodes
+            <h1 class="page-header">Home Node Details
                 <button class="pull-right btn btn-success"  data-toggle="modal" data-target="#addHomeNodeModal"><i class="fa fa-plus" ></i></button>
             </h1>
         </div>
@@ -41,7 +41,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Home Nodes
+                    {{$homenode->pivot->nickname}}
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -50,7 +50,6 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nickname</th>
                                 <th>Coordinates</th>
                                 <th>Last Transmission</th>
                                 <th>Action</th>
@@ -59,24 +58,21 @@
                             <tbody>
                                 <?php
 
-//                                    foreach($homenodes as $homenode){
+                                    foreach($leafnodes as $leafnode){
 
                                         ?>
-                                {{--<tr>--}}
+                                <tr>
 
-                                {{--<td>{{$homenode->id}}</td>--}}
-                                    {{--<td>{{$homenode->pivot->nickname}}</td>--}}
-                                    {{--<td>{{$homenode->latitude}}{{$homenode->longitude}}</td>--}}
-                                    {{--<td>TODO</td>--}}
-                                    {{--<td>--}}
-                                        {{--<a href="#" style="text-decoration: none;" title="Edit Home Node"><i class="fa fa-edit fa-2x"></i> </a>--}}
-                                        {{--<a href="#" style="text-decoration: none;" title="View Leaf Nodes"><i class="fa fa-leaf fa-2x"></i> </a>--}}
-                                        {{--<a href="#" style="text-decoration: none;" title="Remove Home Node" data-toggle="modal" data-target="#deleteModal" onclick="deleteId('{{ route('removeHomeNode', $homenode->id) }}')"><i class="fa fa-trash fa-2x"></i> </a>--}}
-                                    {{--</td>--}}
-                                {{--</tr>--}}
+                                    <td>{{$leafnode->id}}</td>
+                                    <td>{{$leafnode->latitude}}{{$leafnode->longitude}}</td>
+                                    <td>TODO</td>
+                                    <td>
+                                        <a href="{{route('getLeafnodeData', ['id' => $leafnode->homenode->id])}}" title="View Leaf Node Data"><i class="fa fa-bar-chart fa-2x" ></i></a>
+                                    </td>
+                                </tr>
 
                                 <?php
-//                                    }
+                                    }
 
                                 ?>
                             </tbody>

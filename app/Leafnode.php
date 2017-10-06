@@ -32,4 +32,8 @@ class Leafnode extends Model
         return $this->belongsTo('SensorWeb\Models\Homenode');
     }
 
+    public function readings(){
+        return $this->hasMany('SensorWeb\Models\Reading');
+    }
+
 }

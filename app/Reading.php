@@ -10,4 +10,11 @@ class Reading extends Model
 {
     use Notifiable;
 
+    public function leafnode(){
+        return $this->belongsTo('SensorWeb\Model\Leafnode');
+    }
+
+    public function homenode(){
+        return $this->leafnode()->homenode()->get();
+    }
 }

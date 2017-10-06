@@ -65,12 +65,12 @@
                                 <tr>
 
                                 <td>{{$homenode->id}}</td>
-                                    <td>{{$homenode->pivot->nickname}}</td>
+                                    <td>{{$homenode->pivot->nickname != "" ? $homenode->pivot->nickname : "<No Nickname>"}}</td>
                                     <td>{{$homenode->latitude}}{{$homenode->longitude}}</td>
                                     <td>TODO</td>
                                     <td>
-                                        <a href="#" style="text-decoration: none;" title="Edit Home Node"><i class="fa fa-edit fa-2x"></i> </a>
-                                        <a href="#" style="text-decoration: none;" title="View Leaf Nodes"><i class="fa fa-leaf fa-2x"></i> </a>
+                                        <a href="{{route('editHomenode', ['id' => $homenode->id])}}" style="text-decoration: none;" title="Edit Home Node"><i class="fa fa-edit fa-2x"></i> </a>
+                                        <a href="{{route('getHomenode', ['id' => $homenode->id])}}" style="text-decoration: none;" title="View Leaf Nodes"><i class="fa fa-leaf fa-2x"></i> </a>
                                         <a href="#" style="text-decoration: none;" title="Remove Home Node" data-toggle="modal" data-target="#deleteModal" onclick="deleteId('{{ route('removeHomeNode', $homenode->id) }}')"><i class="fa fa-trash fa-2x"></i> </a>
                                     </td>
                                 </tr>

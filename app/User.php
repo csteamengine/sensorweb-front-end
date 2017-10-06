@@ -30,4 +30,21 @@ class User extends Authenticatable
     public function homenodes(){
         return $this->belongsToMany('SensorWeb\Models\Homenode', 'user_homenodes', 'user_id', 'homenode_id')->withPivot('nickname');
     }
+
+    public function leafnodes(){
+        $leafnodes = [];
+        foreach($this->homenodes()->get() as $homenode){
+            $currLeafnodes = $homenode->leafnodes()->get();
+
+            if(sizeof($currLeafnodes)){
+
+                foreach($currLeafnodes as $leafnode){
+                    $leafnode->homenode = $homenode;
+
+                    array_push($leafnodes, $leafnode);
+                }
+            }
+        }
+        return $leafnodes;
+    }
 }

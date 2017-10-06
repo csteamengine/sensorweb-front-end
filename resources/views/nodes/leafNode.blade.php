@@ -9,24 +9,23 @@
 
 @extends('layouts.layout')
 
-@section('title', 'Leaf Nodes')
+@section('title', 'Home Nodes')
 
 @section('cssincludes')
     <link rel="stylesheet" href="/css/jquery.dataTables.min.css">
-    {{--<link rel="stylesheet" href="/vendor/datatables-responsive/dataTables.responsive.css">--}}
+    <link rel="stylesheet" href="/vendor/datatables-responsive/dataTables.responsive.css">
+    <link rel="stylesheet" href="/css/nodes.css">
 @endsection
 
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Leaf Nodes
-                <button class="pull-right btn btn-success"  data-toggle="modal" data-target="#addHomeNodeModal"><i class="fa fa-plus" ></i></button>
-            </h1>
+            <h1 class="page-header">Leaf Node Data</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
     <?php
-    foreach($errors as $error){
+       foreach($errors as $error){
     ?>
     <div class="alert alert-danger alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -35,56 +34,19 @@
 
     <?php
 
-    }
+      }
     ?>
-    <!-- /.row -->
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Home Nodes
+                    Leaf Node Data
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table table-hover" id="data-tables">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Home Node</th>
-                                <th>Coordinates</th>
-                                <th>Last Transmission</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-
-                            foreach($leafnodes as $leafnode){
-
-                            ?>
-                            <tr>
-
-                                <td>{{$leafnode->id}}</td>
-                                <td>{{$leafnode->homenode->pivot->nickname != "" ? $leafnode->homenode->pivot->nickname : "<No Nickname>"}}</td>
-                                <td>{{$leafnode->latitude}}{{$leafnode->longitude}}</td>
-                                <td>TODO</td>
-                                <td>
-                                    <a href="{{route('getHomenode', ['id' => $leafnode->homenode->id])}}" title="Go to Home Node"><i class="fa fa-home fa-2x" ></i></a>
-                                    <a href="{{route('getLeafnodeData', ['id' => $leafnode->homenode->id])}}" title="View Leaf Node Data"><i class="fa fa-bar-chart fa-2x" ></i></a>
-                                </td>
-                            </tr>
-
-                            <?php
-                            }
-
-                            ?>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.table-responsive -->
+                    {{--TODO get all the readings from the database and make different graphs of it.--}}
+                    Here, we will display graphs of the data recieved from this node.
                 </div>
-                <!-- /.panel-body -->
             </div>
             <!-- /.panel -->
         </div>
@@ -101,23 +63,23 @@
                     </div>
                     <div class="modal-body">
                         <p>To add a home node, you must know the unique ID of the node.</p>
-                        {{ csrf_field() }}
+                            {{ csrf_field() }}
 
-                        <div class="form-group">
-                            <label for="unique_id" class="col-md-4 control-label">Unique Id</label>
+                            <div class="form-group">
+                                <label for="unique_id" class="col-md-4 control-label">Unique Id</label>
 
-                            <div class="col-md-6">
-                                <input id="unique_id" type="text" class="form-control" name="unique_id" required autofocus>
+                                <div class="col-md-6">
+                                    <input id="unique_id" type="text" class="form-control" name="unique_id" required autofocus>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="nickname" class="col-md-4 control-label">Nickname</label>
+                            <div class="form-group">
+                                <label for="nickname" class="col-md-4 control-label">Nickname</label>
 
-                            <div class="col-md-6">
-                                <input id="nickname" type="text" class="form-control" name="nickname" required>
+                                <div class="col-md-6">
+                                    <input id="nickname" type="text" class="form-control" name="nickname" required>
+                                </div>
                             </div>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <div class="form-group">
@@ -150,7 +112,7 @@
                     </form>
                 </div>
                 {{--<div class="modal-footer">--}}
-                {{--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--}}
+                    {{--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--}}
                 {{--</div>--}}
             </div>
 
@@ -164,6 +126,7 @@
         }
     </script>
 @endsection
+
 @section('includes')
     <script src="/js/jquery.dataTables.js"></script>
     <script src="/js/nodes.js"></script>
