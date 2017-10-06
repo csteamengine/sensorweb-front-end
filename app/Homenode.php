@@ -14,4 +14,7 @@ class Homenode extends Model
     public function users(){
         return $this->belongsToMany('SensorWeb\User', 'user_homenodes', 'homenode_id', 'user_id');
     }
+    public function leafnodes(){
+        return $this->hasMany('SensorWeb\Models\Leafnode');
+    }
 }

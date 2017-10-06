@@ -9,7 +9,7 @@
 
 @extends('layouts.layout')
 
-@section('title', 'Leaf Nodes')
+@section('title', 'Home Nodes')
 
 @section('cssincludes')
     <link rel="stylesheet" href="/css/jquery.dataTables.min.css">
@@ -19,14 +19,14 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Leaf Nodes
+            <h1 class="page-header">Home Nodes
                 <button class="pull-right btn btn-success"  data-toggle="modal" data-target="#addHomeNodeModal"><i class="fa fa-plus" ></i></button>
             </h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
     <?php
-    foreach($errors as $error){
+       foreach($errors as $error){
     ?>
     <div class="alert alert-danger alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -35,9 +35,8 @@
 
     <?php
 
-    }
+      }
     ?>
-    <!-- /.row -->
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
@@ -47,7 +46,7 @@
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="table-responsive">
-                        <table class="table table-hover" id="data-tables">
+                        <table class="table table-hover table-striped" id="data-tables">
                             <thead>
                             <tr>
                                 <th>#</th>
@@ -58,26 +57,28 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <?php
+                                <?php
 
-                            foreach($leafnodes as $leafnode){
+//                                    foreach($homenodes as $homenode){
 
-                            ?>
-                            <tr>
+                                        ?>
+                                {{--<tr>--}}
 
-                                <td>{{$leafnode->id}}</td>
-                                <td>{{$leafnode->homenode->pivot->nickname}}</td>
-                                <td>{{$leafnode->latitude}}{{$leafnode->longitude}}</td>
-                                <td>TODO</td>
-                                <td>
-                                    <a href="{{route('getHomenode', ['id' => $leafnode->homenode->id])}}" title="Go to Home Node"><i class="fa fa-home fa-2x" ></i></a>
-                                </td>
-                            </tr>
+                                {{--<td>{{$homenode->id}}</td>--}}
+                                    {{--<td>{{$homenode->pivot->nickname}}</td>--}}
+                                    {{--<td>{{$homenode->latitude}}{{$homenode->longitude}}</td>--}}
+                                    {{--<td>TODO</td>--}}
+                                    {{--<td>--}}
+                                        {{--<a href="#" style="text-decoration: none;" title="Edit Home Node"><i class="fa fa-edit fa-2x"></i> </a>--}}
+                                        {{--<a href="#" style="text-decoration: none;" title="View Leaf Nodes"><i class="fa fa-leaf fa-2x"></i> </a>--}}
+                                        {{--<a href="#" style="text-decoration: none;" title="Remove Home Node" data-toggle="modal" data-target="#deleteModal" onclick="deleteId('{{ route('removeHomeNode', $homenode->id) }}')"><i class="fa fa-trash fa-2x"></i> </a>--}}
+                                    {{--</td>--}}
+                                {{--</tr>--}}
 
-                            <?php
-                            }
+                                <?php
+//                                    }
 
-                            ?>
+                                ?>
                             </tbody>
                         </table>
                     </div>
@@ -100,23 +101,23 @@
                     </div>
                     <div class="modal-body">
                         <p>To add a home node, you must know the unique ID of the node.</p>
-                        {{ csrf_field() }}
+                            {{ csrf_field() }}
 
-                        <div class="form-group">
-                            <label for="unique_id" class="col-md-4 control-label">Unique Id</label>
+                            <div class="form-group">
+                                <label for="unique_id" class="col-md-4 control-label">Unique Id</label>
 
-                            <div class="col-md-6">
-                                <input id="unique_id" type="text" class="form-control" name="unique_id" required autofocus>
+                                <div class="col-md-6">
+                                    <input id="unique_id" type="text" class="form-control" name="unique_id" required autofocus>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="nickname" class="col-md-4 control-label">Nickname</label>
+                            <div class="form-group">
+                                <label for="nickname" class="col-md-4 control-label">Nickname</label>
 
-                            <div class="col-md-6">
-                                <input id="nickname" type="text" class="form-control" name="nickname" required>
+                                <div class="col-md-6">
+                                    <input id="nickname" type="text" class="form-control" name="nickname" required>
+                                </div>
                             </div>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <div class="form-group">
@@ -149,7 +150,7 @@
                     </form>
                 </div>
                 {{--<div class="modal-footer">--}}
-                {{--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--}}
+                    {{--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--}}
                 {{--</div>--}}
             </div>
 
@@ -163,6 +164,7 @@
         }
     </script>
 @endsection
+
 @section('includes')
     <script src="/js/jquery.dataTables.js"></script>
     <script src="/js/nodes.js"></script>

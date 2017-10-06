@@ -36,13 +36,14 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    @yield('cssincludes')
 </head>
 <body>
 
 <div id="wrapper">
     @include('navigation')
 
-    <div id="page-wrapper">
+    <div id="page-wrapper" class="container-fluid">
         @yield('content')
     </div>
     <!-- /#page-wrapper -->
@@ -65,6 +66,8 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="/vendor/sb-admin-2/js/sb-admin-2.js"></script>
+@yield('includes');
+
 
 </body>
 </html>

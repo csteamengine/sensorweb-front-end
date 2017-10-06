@@ -2,6 +2,7 @@
 
 namespace SensorWeb\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
@@ -25,6 +26,21 @@ class NodeController extends BaseController
         $this->middleware('auth');
     }
 
+    public function getHomeNode($id){
+        $user = Auth::user();
+        $errors = [];
+
+        $existing = $user->homenodes()->find($id)->first();
+
+        if($existing){
+            return view('nodes/homenode', ['homenode' => $existing]);
+        }else{
+            $homenodes = $user->homenodes()->get();
+            array_push($errors, 'You do not have access to that Home Node');
+            return redirect()->route('homeNodes')->with(['homenodes'=>$homenodes, 'errors'=>$errors]);
+        }
+    }
+
     public function addHomeNode(Request $request){
         $user = Auth::user();
 
@@ -39,7 +55,6 @@ class NodeController extends BaseController
             $homenode = Homenode::where('unique_id', $request->unique_id)->first();
 
             if($homenode){
-                $userHomenodes = $user->homenodes()->attach($homenode->id);
                 $user->homenodes()->save($homenode, ['nickname' => $request->nickname]);
             }else{
                 array_push($errors, 'There is no homenode with that unique id');
@@ -53,9 +68,21 @@ class NodeController extends BaseController
         return redirect()->route('homeNodes')->with(['homenodes' => $homenodes, 'errors' => $errors]);
     }
 
-    public function removeHomeNode(){
+    public function removeHomeNode($id){
         //TODO remove home node from user_homenodes;
-        return view('nodes/homeNodes');
+        $user = Auth::user();
+        $errors =[];
+
+        $homenode = $user->homenodes()->where('homenode_id', $id)->first();
+
+        if($homenode){
+            $user->homenodes()->detach($id);
+        }else{
+            array_push($errors, 'You cannot remove that home node.');
+        }
+
+        $homenodes = $user->homenodes()->get();
+        return redirect()->route('homeNodes')->with(['homenodes' => $homenodes, 'errors' => $errors]);
     }
 
     public function homeNodes(){
@@ -66,6 +93,23 @@ class NodeController extends BaseController
     }
 
     public function leafNodes(){
-        return view('nodes/leafNodes');
+        $user = Auth::user();
+        $errors = [];
+
+        $leafnodes = [];
+        foreach($user->homenodes()->get() as $homenode){
+            $currLeafnodes = $homenode->leafnodes()->get();
+
+            if(sizeof($currLeafnodes)){
+
+                foreach($currLeafnodes as $leafnode){
+                    $leafnode->homenode = $homenode;
+
+                    array_push($leafnodes, $leafnode);
+                }
+            }
+        }
+
+        return view('nodes/leafNodes', ['leafnodes' => $leafnodes, 'errors' => $errors]);
     }
 }

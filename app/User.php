@@ -28,6 +28,6 @@ class User extends Authenticatable
     ];
 
     public function homenodes(){
-        return $this->belongsToMany('SensorWeb\Models\Homenode', 'user_homenodes', 'user_id', 'homenode_id');
+        return $this->belongsToMany('SensorWeb\Models\Homenode', 'user_homenodes', 'user_id', 'homenode_id')->withPivot('nickname');
     }
 }

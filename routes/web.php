@@ -22,10 +22,12 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('fields', 'FieldController@fields')->name('fields');
 Route::post('fields/add', 'FieldController@addField')->name('addField');
 Route::get('fields/remove', 'FieldController@removeField')->name('removeField');
+Route::get('fields/{id}', 'FieldController@getField')->name('getField');
 
 Route::get('homeNodes', 'NodeController@homeNodes')->name('homeNodes');
 Route::post('homeNodes/add', 'NodeController@addHomeNode')->name('addHomeNode');
-Route::get('homeNodes/remove', 'NodeController@removeHomeNode')->name('removeHomeNode');
+Route::get('homeNodes/remove/{id}', 'NodeController@removeHomeNode')->name('removeHomeNode');
+Route::get('homeNodes/{id}', 'NodeController@getHomeNode')->name('getHomenode');
 
 Route::get('leafNodes', 'NodeController@leafNodes')->name('leafNodes');
 

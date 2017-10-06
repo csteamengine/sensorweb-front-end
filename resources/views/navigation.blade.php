@@ -20,25 +20,27 @@
     </div>
     <!-- /.navbar-header -->
 
-    <ul class="nav navbar-top-links navbar-right">
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-user">
-                <li><a href="/userProfile"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                </li>
-                <li><a href="/settings"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                </li>
-                <li class="divider"></li>
-                <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                </li>
-            </ul>
-            <!-- /.dropdown-user -->
-        </li>
-        <!-- /.dropdown -->
-    </ul>
-    <!-- /.navbar-top-links -->
+    <div class="container-fluid">
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="/userProfile"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    </li>
+                    <li><a href="/settings"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+        <!-- /.navbar-top-links -->
+    </div>
 
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
@@ -50,10 +52,10 @@
                     <a href="/fields"><i class="fa fa-globe fa-fw"></i> Fields</a>
                 </li>
                 <li>
-                    <a href="/homeNodes"><i class="fa fa-home fa-fw"></i> Home Node Data</a>
+                    <a href="/homeNodes"><i class="fa fa-home fa-fw"></i> Home Nodes</a>
                 </li>
                 <li>
-                    <a href="/leafNodes"><i class="fa fa-leaf fa-fw"></i> Leaf Node Data</a>
+                    <a href="/leafNodes"><i class="fa fa-leaf fa-fw"></i> Leaf Nodes</a>
                 </li>
                 <li>
                     <a href="/analysis"><i class="fa fa-bar-chart fa-fw"></i> Data Analysis</a>

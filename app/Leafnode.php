@@ -27,4 +27,9 @@ class Leafnode extends Model
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function homenode(){
+        return $this->belongsTo('SensorWeb\Models\Homenode');
+    }
+
 }
