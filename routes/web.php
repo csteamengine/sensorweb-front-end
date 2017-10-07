@@ -19,20 +19,16 @@ Route::get('home', 'HomeController@home')->name('home');
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::get('fields', 'FieldController@fields')->name('fields');
-Route::post('fields/add', 'FieldController@addField')->name('addField');
-Route::get('fields/remove', 'FieldController@removeField')->name('removeField');
-Route::get('fields/{id}', 'FieldController@getField')->name('getField');
-Route::get('fields/edit/{id}', 'FieldController@editField')->name('editField');
-
 Route::get('homeNodes', 'NodeController@homeNodes')->name('homeNodes');
 Route::post('homeNodes/add', 'NodeController@addHomeNode')->name('addHomeNode');
 Route::get('homeNodes/remove/{id}', 'NodeController@removeHomeNode')->name('removeHomeNode');
 Route::get('homeNodes/{id}', 'NodeController@getHomeNode')->name('getHomenode');
 Route::get('homeNodes/edit/{id}', 'NodeController@editHomeNode')->name('editHomenode');
+Route::post('homeNodes/update', 'NodeController@updateHomenode')->name('updateHomenode');
 
 Route::get('leafNodes', 'NodeController@leafNodes')->name('leafNodes');
 Route::get('leafNodes/{id}', 'NodeController@getLeafnodeData')->name('getLeafnodeData');
+Route::get('readings/remove/{id}', 'NodeController@removeReading')->name('removeReading');
 
 Route::get('analysis', 'HomeController@analysis')->name('analysis');
 

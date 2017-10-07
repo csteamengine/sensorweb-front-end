@@ -20,7 +20,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Home Node Details
-                <button class="pull-right btn btn-success"  data-toggle="modal" data-target="#addHomeNodeModal"><i class="fa fa-plus" ></i></button>
+                <a href="{{route('editHomenode', ['id' => $homenode->id])}}" class="pull-right btn btn-success"><i class="fa fa-edit fa-2x" ></i></a>
             </h1>
         </div>
         <!-- /.col-lg-12 -->

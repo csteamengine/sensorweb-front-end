@@ -45,14 +45,22 @@
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('addHomeNode') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('updateHomenode') }}">
                         {{ csrf_field() }}
-
+                        <input type="hidden" name="id" value="{{$homenode->id}}" />
                         <div class="form-group">
-                            <label for="unique_id" class="col-md-4 control-label">Unique Id</label>
+                            <label for="latitude" class="col-md-4 control-label">Latitude</label>
 
                             <div class="col-md-6">
-                                <input id="unique_id" type="text" class="form-control" name="unique_id" value="{{$homenode->unique_id}}" required autofocus>
+                                <input id="latitude" type="text" class="form-control" name="latitude" value="{{$homenode->latitude}}" >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="longitude" class="col-md-4 control-label">Longitude</label>
+
+                            <div class="col-md-6">
+                                <input id="longitude" type="text" class="form-control" name="longitude" value="{{$homenode->longitude}}" >
                             </div>
                         </div>
 
@@ -60,18 +68,16 @@
                             <label for="nickname" class="col-md-4 control-label">Nickname</label>
 
                             <div class="col-md-6">
-                                <input id="nickname" type="text" class="form-control" name="nickname" value="{{$homenode->pivot->nickname}}" required>
+                                <input id="nickname" type="text" class="form-control" name="nickname" value="{{$homenode->pivot->nickname}}">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
-                                <a href="{{route('homeNodes')}}" class="btn btn-default">
+                                <a href="{{route('getHomenode', ['id' => $homenode->id])}}" class="btn btn-default">
                                     Cancel
                                 </a>
-                                <button type="submit" class="btn btn-primary">
-                                    Save
-                                </button>
+                                <input type="submit" class="btn btn-primary" value="Save">
                             </div>
                         </div>
                     </form>
@@ -99,9 +105,6 @@
                         <input type="submit" class="btn btn-danger" value="Delete">
                     </form>
                 </div>
-                {{--<div class="modal-footer">--}}
-                    {{--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--}}
-                {{--</div>--}}
             </div>
 
         </div>

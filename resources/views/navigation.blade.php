@@ -49,9 +49,6 @@
                     <a href="/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="/fields"><i class="fa fa-globe fa-fw"></i> Fields</a>
-                </li>
-                <li>
                     <a href="/homeNodes"><i class="fa fa-home fa-fw"></i> Home Nodes</a>
                 </li>
                 <li>

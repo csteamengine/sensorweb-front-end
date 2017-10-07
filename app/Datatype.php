@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Field extends Model
+class Datatype extends Model
 {
     use Notifiable;
 
-    public function Field(){
-        $this->hasMany('App/UserField');
+    public function leafnode(){
+        return $this->belongsTo('SensorWeb\Model\Leafnode');
     }
 }

@@ -20,7 +20,9 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Leaf Node Data</h1>
+            <h1 class="page-header">Leaf Node Data
+                <a href="{{route('getHomenode', ['id' => $leafnode->homenode_id])}}" class="pull-right btn btn-success"><i class="fa fa-home fa-2x" ></i></a>
+            </h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -44,56 +46,45 @@
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
-                    {{--TODO get all the readings from the database and make different graphs of it.--}}
-                    Here, we will display graphs of the data recieved from this node.
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="data-tables">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Data Type</th>
+                                <th>Value</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+
+                            foreach($readings as $reading){
+
+                            ?>
+                            <tr>
+
+                                <td>{{$reading->id}}</td>
+                                <td>TODO</td>
+                                <td>{{$leafnode->latitude}}{{$leafnode->longitude}}</td>
+                                <td>TODO</td>
+                                <td>
+                                    <a href="#" title="Delete Data" data-toggle="modal" data-target="#deleteModal" onclick="deleteId('{{ route('removeReading', $reading->id) }}')"><i class="fa fa-trash fa-2x" ></i></a>
+                                </td>
+                            </tr>
+
+                            <?php
+                            }
+
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
                 </div>
             </div>
             <!-- /.panel -->
-        </div>
-    </div>
-    <!-- Modal -->
-    <div id="addHomeNodeModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <form class="form-horizontal" method="POST" action="{{ route('addHomeNode') }}">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Add Home Node</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>To add a home node, you must know the unique ID of the node.</p>
-                            {{ csrf_field() }}
-
-                            <div class="form-group">
-                                <label for="unique_id" class="col-md-4 control-label">Unique Id</label>
-
-                                <div class="col-md-6">
-                                    <input id="unique_id" type="text" class="form-control" name="unique_id" required autofocus>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="nickname" class="col-md-4 control-label">Nickname</label>
-
-                                <div class="col-md-6">
-                                    <input id="nickname" type="text" class="form-control" name="nickname" required>
-                                </div>
-                            </div>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">
-                                    Add
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </form>
         </div>
     </div>
     <!-- Delete Modal -->
@@ -121,7 +112,6 @@
 
     <script>
         function deleteId(route){
-            console.log(route);
             document.getElementById('deleteForm').action = route;
         }
     </script>

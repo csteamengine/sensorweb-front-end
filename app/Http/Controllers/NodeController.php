@@ -10,6 +10,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use SensorWeb\Models\Homenode;
+use SensorWeb\Models\Reading;
 use SensorWeb\User;
 
 class NodeController extends BaseController
@@ -66,6 +67,26 @@ class NodeController extends BaseController
         }
     }
 
+    //Removes a reading data from the table.
+    public function removeReading($id){
+        $user = Auth::user();
+        $errors = [];
+        $reading = Reading::find($id);
+        if($reading){
+            $leafnodes = $user->leafnodes();
+            foreach($leafnodes as $leafnode){
+                if($reading->leafnode_id == $leafnode->id){
+                    $reading->delete();
+                    return redirect()->route('getLeafnodeData', ['id' => $leafnode->id]);
+                }
+            }
+        }
+        array_push($errors, 'You do not have access to that data.');
+
+        return redirect()->route('leafNodes')->with(['errors' => $errors]);
+
+    }
+
     public function addHomeNode(Request $request){
         $user = Auth::user();
 
@@ -117,6 +138,33 @@ class NodeController extends BaseController
         $homenode = $user->homenodes()->find($id);
         if($homenode){
             return view('nodes/editHomenode', ['homenode' => $homenode, 'errors']);
+        }else{
+            $homenodes = $user->homenodes()->get();
+            array_push($errors, 'You do not have access to that Home Node');
+            return redirect()->route('homeNodes')->with(['homenodes'=>$homenodes, 'errors'=>$errors]);
+        }
+    }
+
+    public function updateHomenode(Request $request){
+        $user = Auth::user();
+        $errors = [];
+
+        $request->validate([
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'nickname' => 'required'
+        ]);
+
+        $homenode = $user->homenodes()->find($request->id);
+
+        if($homenode){
+            //Updates the homenode info and the pivot
+            $homenode->latitude = $request->latitude;
+            $homenode->longitude = $request->longitude;
+            $homenode->pivot->nickname = $request->nickname;
+            $homenode->save();
+            $homenode->pivot->save();
+            return redirect()->route('getHomenode', ['id' => $homenode->id, 'homenode' => $homenode, 'errors']);
         }else{
             $homenodes = $user->homenodes()->get();
             array_push($errors, 'You do not have access to that Home Node');

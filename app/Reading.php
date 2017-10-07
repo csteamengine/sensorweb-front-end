@@ -17,4 +17,8 @@ class Reading extends Model
     public function homenode(){
         return $this->leafnode()->homenode()->get();
     }
+
+    public function datatype(){
+        return $this->hasOne('SensorWeb\Model\Datatype');
+    }
 }
