@@ -3,6 +3,7 @@
 namespace SensorWeb\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -22,15 +23,21 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function home(){
-        return view('home');
+        $user = Auth::user();
+        $homenodes = $user->homenodes()->get();
+        $leafnodes = $user->leafnodes();
+        $readings = $user->readings();
+        return view('home', ['homenodes' => $homenodes, 'leafnodes' => $leafnodes, 'readings' => $readings, 'user' => $user]);
     }
 
     public function analysis(){
-        return view('analysis');
+        $user = Auth::user();
+        return view('analysis', ['user' => $user]);
     }
 
     public function settings(){
-        return view('settings');
+        $user = Auth::user();
+        return view('settings', ['user' => $user]);
     }
 
 }

@@ -28,12 +28,12 @@
                         <i class="fa fa-map-marker fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">6</div>
-                        <div>Active Fields</div>
+                        <div class="huge">{{sizeof($homenodes)}}</div>
+                        <div>Active Homenodes</div>
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="{{route('homeNodes')}}">
                 <div class="panel-footer">
                     <span class="pull-left">View Details</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -50,12 +50,12 @@
                         <i class="fa fa-tasks fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">12</div>
-                        <div>New Data Analyses</div>
+                        <div class="huge">{{sizeof($leafnodes)}}</div>
+                        <div>Active Leafnodes</div>
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="{{route('homeNodes')}}">
                 <div class="panel-footer">
                     <span class="pull-left">View Details</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -72,12 +72,12 @@
                         <i class="fa fa-sitemap fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">124</div>
+                        <div class="huge">{{sizeof($readings)}}</div>
                         <div>New Data Readings</div>
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="{{route('leafNodes')}}">
                 <div class="panel-footer">
                     <span class="pull-left">View Details</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -94,8 +94,8 @@
                         <i class="fa fa-warning fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">4</div>
-                        <div>Issue Notifications</div>
+                        <div class="huge">0</div>
+                        <div>New Notifications</div>
                     </div>
                 </div>
             </div>
@@ -109,7 +109,7 @@
         </div>
     </div>
 </div>
-<!-- /.row -->
+{{--<!-- /.row -->
 <div class="row">
     <div class="col-lg-8">
         <div class="panel panel-default">
@@ -197,5 +197,5 @@
     </div>
     <!-- /.col-lg-4 -->
 </div>
-<!-- /.row -->
+<!-- /.row -->--}}
 @endsection

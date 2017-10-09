@@ -35,5 +35,6 @@ Route::get('analysis', 'HomeController@analysis')->name('analysis');
 Route::get('settings', 'HomeController@settings')->name('settings');
 
 Route::get('userProfile', 'UserController@userProfile')->name('userProfile');
+Route::post('updateUser', 'UserController@updateUser')->name('updateUser');
 
 

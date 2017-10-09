@@ -47,4 +47,20 @@ class User extends Authenticatable
         }
         return $leafnodes;
     }
+
+    public function readings(){
+        $leafnodes = $this->leafnodes();
+        $allReadings = [];
+        foreach($leafnodes as $leafnode){
+            $readings = $leafnode->readings()->where('visited', 0)->get();
+            if(sizeof($readings)){
+                foreach($readings as $reading){
+                    array_push($allReadings, $reading);
+                    $reading->visited = 1;
+                    $reading->save();
+                }
+            }
+        }
+        return $allReadings;
+    }
 }

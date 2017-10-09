@@ -34,11 +34,11 @@ class NodeController extends BaseController
         $homenode = $user->homenodes()->find($id);
         if($homenode){
             $leafnodes = $homenode->leafnodes()->get();
-            return view('nodes/homenode', ['homenode' => $homenode, 'leafnodes' => $leafnodes]);
+            return view('nodes/homenode', ['homenode' => $homenode, 'leafnodes' => $leafnodes, 'user' => $user]);
         }else{
             $homenodes = $user->homenodes()->get();
             array_push($errors, 'You do not have access to that Home Node');
-            return redirect()->route('homeNodes')->with(['homenodes'=>$homenodes, 'errors'=>$errors]);
+            return redirect()->route('homeNodes')->with(['homenodes'=>$homenodes, 'errors'=>$errors, 'user' => $user]);
         }
     }
 
@@ -59,11 +59,11 @@ class NodeController extends BaseController
         }
         if($found){
             $readings = $leafnode->readings()->get();
-            return view('nodes/leafnode', ['leafnode' => $leafnode, 'readings' => $readings]);
+            return view('nodes/leafnode', ['leafnode' => $leafnode, 'readings' => $readings, 'user' => $user]);
         }else{
             $leafnodes = $user->leafnodes()->get();
             array_push($errors, 'You do not have access to that Home Node');
-            return redirect()->route('homeNodes')->with(['leafnodes'=>$leafnodes, 'errors'=>$errors]);
+            return redirect()->route('homeNodes')->with(['leafnodes'=>$leafnodes, 'errors'=>$errors, 'user' => $user]);
         }
     }
 
@@ -77,13 +77,13 @@ class NodeController extends BaseController
             foreach($leafnodes as $leafnode){
                 if($reading->leafnode_id == $leafnode->id){
                     $reading->delete();
-                    return redirect()->route('getLeafnodeData', ['id' => $leafnode->id]);
+                    return redirect()->route('getLeafnodeData', ['id' => $leafnode->id, 'user' => $user]);
                 }
             }
         }
         array_push($errors, 'You do not have access to that data.');
 
-        return redirect()->route('leafNodes')->with(['errors' => $errors]);
+        return redirect()->route('leafNodes')->with(['errors' => $errors, 'user' => $user]);
 
     }
 
@@ -101,7 +101,7 @@ class NodeController extends BaseController
             $homenode = Homenode::where('unique_id', $request->unique_id)->first();
 
             if($homenode){
-                $user->homenodes()->save($homenode, ['nickname' => $request->nickname]);
+                $user->homenodes()->save($homenode, ['nickname' => $request->nickname, 'user' => $user]);
             }else{
                 array_push($errors, 'There is no homenode with that unique id');
             }
@@ -111,7 +111,7 @@ class NodeController extends BaseController
 
         $homenodes = $user->homenodes()->get();
 
-        return redirect()->route('homeNodes')->with(['homenodes' => $homenodes, 'errors' => $errors]);
+        return redirect()->route('homeNodes')->with(['homenodes' => $homenodes, 'errors' => $errors, 'user' => $user]);
     }
 
     public function removeHomeNode($id){
@@ -128,7 +128,7 @@ class NodeController extends BaseController
         }
 
         $homenodes = $user->homenodes()->get();
-        return redirect()->route('homeNodes')->with(['homenodes' => $homenodes, 'errors' => $errors]);
+        return redirect()->route('homeNodes')->with(['homenodes' => $homenodes, 'errors' => $errors, 'user' => $user]);
     }
 
     public function editHomenode($id){
@@ -137,11 +137,11 @@ class NodeController extends BaseController
 
         $homenode = $user->homenodes()->find($id);
         if($homenode){
-            return view('nodes/editHomenode', ['homenode' => $homenode, 'errors']);
+            return view('nodes/editHomenode', ['homenode' => $homenode, 'errors' => $errors, 'user' => $user]);
         }else{
             $homenodes = $user->homenodes()->get();
             array_push($errors, 'You do not have access to that Home Node');
-            return redirect()->route('homeNodes')->with(['homenodes'=>$homenodes, 'errors'=>$errors]);
+            return redirect()->route('homeNodes')->with(['homenodes'=>$homenodes, 'errors'=>$errors, 'user' => $user]);
         }
     }
 
@@ -164,11 +164,11 @@ class NodeController extends BaseController
             $homenode->pivot->nickname = $request->nickname;
             $homenode->save();
             $homenode->pivot->save();
-            return redirect()->route('getHomenode', ['id' => $homenode->id, 'homenode' => $homenode, 'errors']);
+            return redirect()->route('getHomenode', ['id' => $homenode->id, 'homenode' => $homenode, 'errors' => $errors, 'user' => $user]);
         }else{
             $homenodes = $user->homenodes()->get();
             array_push($errors, 'You do not have access to that Home Node');
-            return redirect()->route('homeNodes')->with(['homenodes'=>$homenodes, 'errors'=>$errors]);
+            return redirect()->route('homeNodes')->with(['homenodes'=>$homenodes, 'errors'=>$errors, 'user' => $user]);
         }
     }
 
@@ -176,7 +176,7 @@ class NodeController extends BaseController
         $user = Auth::user();
         $homenodes = $user->homenodes()->get();
 
-        return view('nodes/homeNodes', ['homenodes' => $homenodes]);
+        return view('nodes/homeNodes', ['homenodes' => $homenodes, 'user' => $user]);
     }
 
     public function leafNodes(){
@@ -185,7 +185,7 @@ class NodeController extends BaseController
 
         $leafnodes = $user->leafnodes();
 
-        return view('nodes/leafNodes', ['leafnodes' => $leafnodes, 'errors' => $errors]);
+        return view('nodes/leafNodes', ['leafnodes' => $leafnodes, 'errors' => $errors, 'user' => $user]);
     }
 
 }
