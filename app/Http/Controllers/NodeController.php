@@ -34,7 +34,7 @@ class NodeController extends BaseController
         $homenode = $user->homenodes()->find($id);
         if($homenode){
             $leafnodes = $homenode->leafnodes()->get();
-            return view('nodes/homenode', ['homenode' => $homenode, 'leafnodes' => $leafnodes, 'user' => $user]);
+            return view('nodes/homeNode', ['homenode' => $homenode, 'leafnodes' => $leafnodes, 'user' => $user]);
         }else{
             $homenodes = $user->homenodes()->get();
             array_push($errors, 'You do not have access to that Home Node');
@@ -137,7 +137,7 @@ class NodeController extends BaseController
 
         $homenode = $user->homenodes()->find($id);
         if($homenode){
-            return view('nodes/editHomenode', ['homenode' => $homenode, 'errors' => $errors, 'user' => $user]);
+            return view('nodes/editHomeNode', ['homenode' => $homenode, 'errors' => $errors, 'user' => $user]);
         }else{
             $homenodes = $user->homenodes()->get();
             array_push($errors, 'You do not have access to that Home Node');
