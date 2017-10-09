@@ -59,7 +59,7 @@ class NodeController extends BaseController
         }
         if($found){
             $readings = $leafnode->readings()->get();
-            return view('nodes/leafnode', ['leafnode' => $leafnode, 'readings' => $readings, 'user' => $user]);
+            return view('nodes/leafNode', ['leafnode' => $leafnode, 'readings' => $readings, 'user' => $user]);
         }else{
             $leafnodes = $user->leafnodes()->get();
             array_push($errors, 'You do not have access to that Home Node');
