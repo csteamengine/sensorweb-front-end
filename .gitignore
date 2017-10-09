@@ -68,7 +68,7 @@ company-statistics-cache.el
 anaconda-mode/
 
 ### Laravel ###
-vendor/
+/vendor/
 node_modules/
 npm-debug.log
 
