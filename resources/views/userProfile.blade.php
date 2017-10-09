@@ -83,6 +83,13 @@
                     {{ Form::submit('Save', ['class' => 'form-control btn btn-primary']) }}
                 </div>
             </div>
+            <br>
+            <div class="row">
+                <div class="col-md-12" align="center">
+                    <a href="/password/reset" class="btn btn-link">Reset Your Password</a>
+                </div>
+            </div>
+
 
             {{ Form::close() }}
         </div>
