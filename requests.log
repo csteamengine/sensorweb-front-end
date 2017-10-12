@@ -1,0 +1,5 @@
+63.224.182.124 - - [09/Oct/2017:15:24:08 -0500] "GET / HTTP/1.1" 200 2464 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
+63.224.182.124 - - [09/Oct/2017:15:24:08 -0500] "GET /css/app.css HTTP/1.1" 304 - "http://sensorweb.ece.iastate.edu/" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
+63.224.182.124 - - [09/Oct/2017:15:24:08 -0500] "GET /js/app.js HTTP/1.1" 304 - "http://sensorweb.ece.iastate.edu/" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
+63.224.182.124 - - [09/Oct/2017:15:24:12 -0500] "GET /echo HTTP/1.1" 404 1482 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
+63.224.182.124 - - [09/Oct/2017:15:24:12 -0500] "GET /favicon.ico HTTP/1.1" 200 - "http://sensorweb.ece.iastate.edu/echo" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
