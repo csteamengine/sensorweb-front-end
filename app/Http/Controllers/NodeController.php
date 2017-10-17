@@ -101,7 +101,7 @@ class NodeController extends BaseController
             $homenode = Homenode::where('unique_id', $request->unique_id)->first();
 
             if($homenode){
-                $user->homenodes()->save($homenode, ['nickname' => $request->nickname, 'user' => $user]);
+                $user->homenodes()->save($homenode, ['nickname' => $request->nickname]);
             }else{
                 array_push($errors, 'There is no homenode with that unique id');
             }
