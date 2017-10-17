@@ -17,7 +17,7 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
+    <link rel="icon" type="image/png" href="/favicon2.png?v=3" />
     <!-- Styles -->
     <style>
         html, body {

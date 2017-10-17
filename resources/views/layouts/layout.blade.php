@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>@yield('title') | SensorWeb</title>
-    <link rel="icon" type="image/png" href="/favicon.png?v=2" />
+    <link rel="icon" type="image/png" href="/favicon2.png?v=3" />
     <!-- Bootstrap Core CSS -->
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
