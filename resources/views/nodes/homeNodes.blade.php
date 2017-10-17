@@ -46,7 +46,7 @@
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="table-responsive">
-                        <table class="table table-hover table-striped" id="data-tables">
+                        <table class="table table-hover table-striped cell-border" id="data-tables">
                             <thead>
                             <tr>
                                 <th>#</th>
@@ -65,10 +65,10 @@
                                 <tr>
 
                                 <td>{{$homenode->id}}</td>
-                                    <td>{{$homenode->pivot->nickname != "" ? $homenode->pivot->nickname : "<No Nickname>"}}</td>
-                                    <td>{{$homenode->latitude}}{{$homenode->longitude}}</td>
-                                    <td>TODO</td>
-                                    <td>
+                                    <td align="center">{{$homenode->pivot->nickname != "" ? $homenode->pivot->nickname : "<No Nickname>"}}</td>
+                                    <td align="center">{{$homenode->latitude}}{{$homenode->longitude}}</td>
+                                    <td align="center">TODO</td>
+                                    <td align="center">
                                         <a href="{{route('editHomenode', ['id' => $homenode->id])}}" style="text-decoration: none;" title="Edit Home Node"><i class="fa fa-edit fa-2x"></i> </a>
                                         <a href="{{route('getHomenode', ['id' => $homenode->id])}}" style="text-decoration: none;" title="View Leaf Nodes"><i class="fa fa-leaf fa-2x"></i> </a>
                                         <a href="#" style="text-decoration: none;" title="Remove Home Node" data-toggle="modal" data-target="#deleteModal" onclick="deleteId('{{ route('removeHomeNode', $homenode->id) }}')"><i class="fa fa-trash fa-2x"></i> </a>

@@ -47,7 +47,7 @@
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="table-responsive">
-                        <table class="table table-hover" id="data-tables">
+                        <table class="table table-hover table-striped cell-border" id="data-tables">
                             <thead>
                             <tr>
                                 <th>#</th>
@@ -65,11 +65,11 @@
                             ?>
                             <tr>
 
-                                <td>{{$reading->id}}</td>
-                                <td>{{$reading->datatype->title}} ({{$reading->datatype->abbreviation}})</td>
-                                <td>{{$reading->value}}</td>
-                                <td>{{$reading->created_at}}</td>
-                                <td>
+                                <td align="center">{{$reading->id}}</td align="center">
+                                <td align="center">{{$reading->datatype->title}} ({{$reading->datatype->abbreviation}})</td>
+                                <td align="center">{{$reading->value}}</td>
+                                <td align="center">{{$reading->created_at}}</td>
+                                <td align="center">
                                     <a href="#" title="Delete Data" data-toggle="modal" data-target="#deleteModal" onclick="deleteId('{{ route('removeReading', $reading->id) }}')"><i class="fa fa-trash fa-2x" ></i></a>
                                 </td>
                             </tr>
