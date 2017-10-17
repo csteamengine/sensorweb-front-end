@@ -154,7 +154,7 @@
 		 *  @param {string} [oOpts.page=all] Limit the selection to the currently displayed page
 		 *    ("current") or not ("all"). If 'current' is given, then order is assumed to be
 		 *    'current' and filter is 'applied', regardless of what they might be given as.
-		 *  @returns {array} Data for the matched elements. If any elements, as a result of the
+		 *  @returns {array} Datatype for the matched elements. If any elements, as a result of the
 		 *    selector, were not TR, TD or TH elements in the DataTable, they will have a null
 		 *    entry in the array.
 		 *  @dtopt API
@@ -790,7 +790,7 @@
 		 * update the cell with, an array of values with one element for each column or
 		 * an object in the same format as the original data source. The function is
 		 * self-referencing in order to make the multi column updates easier.
-		 *  @param {object|array|string} mData Data to update the cell/row with
+		 *  @param {object|array|string} mData Datatype to update the cell/row with
 		 *  @param {node|int} mRow TR element you want to update or the aoData index
 		 *  @param {int} [iColumn] The column to update, give as null or undefined to
 		 *    update a whole row.
@@ -2553,7 +2553,7 @@
 	 * Return a function that can be used to get data from a source object, taking
 	 * into account the ability to use nested objects as a source
 	 *  @param {string|int|function} mSource The data source for the object
-	 *  @returns {function} Data get function
+	 *  @returns {function} Datatype get function
 	 *  @memberof DataTable#oApi
 	 */
 	function _fnGetObjectDataFn( mSource )
@@ -2678,7 +2678,7 @@
 	 * Return a function that can be used to set data from a source object, taking
 	 * into account the ability to use nested objects as a source
 	 *  @param {string|int|function} mSource The data source for the object
-	 *  @returns {function} Data set function
+	 *  @returns {function} Datatype set function
 	 *  @memberof DataTable#oApi
 	 */
 	function _fnSetObjectDataFn( mSource )
@@ -2935,7 +2935,7 @@
 	 * @param {node|object} TR element from which to read data or existing row
 	 *   object from which to re-read the data from the cells
 	 * @param {int} [colIdx] Optional column index
-	 * @param {array|object} [d] Data source object. If `colIdx` is given then this
+	 * @param {array|object} [d] Datatype source object. If `colIdx` is given then this
 	 *   parameter should also be given and will be used to write the data into.
 	 *   Only the column in question will be written
 	 * @returns {object} Object with two parameters: `data` the data read, in
@@ -3804,7 +3804,7 @@
 	 * parameters can have multiple forms, and backwards compatibility.
 	 *
 	 * @param {object} oSettings dataTables settings object
-	 * @param {array} data Data to send to the server, required by
+	 * @param {array} data Datatype to send to the server, required by
 	 *     DataTables - may be augmented by developer callbacks
 	 * @param {function} fn Callback function to run when data is obtained
 	 */
@@ -4070,7 +4070,7 @@
 	
 	
 	/**
-	 * Data the data from the server (nuking the old) and redraw the table
+	 * Datatype the data from the server (nuking the old) and redraw the table
 	 *  @param {object} oSettings dataTables settings object
 	 *  @param {object} json json data return from the server.
 	 *  @param {string} json.sEcho Tracking flag for DataTables to match requests
@@ -4127,7 +4127,7 @@
 	 * `_fnGetObjectDataFn` allows the data to be sourced from a property of the
 	 * source object, or from a processing function.
 	 *  @param {object} oSettings dataTables settings object
-	 *  @param  {object} json Data source object / array from the server
+	 *  @param  {object} json Datatype source object / array from the server
 	 *  @return {array} Array of data to use
 	 */
 	function _fnAjaxDataSrc ( oSettings, json )
@@ -6519,7 +6519,7 @@
 	 * This is good for accessibility since a return on the keyboard will have the
 	 * same effect as a click, if the element has focus.
 	 *  @param {element} n Element to bind the action to
-	 *  @param {object} oData Data object to pass to the triggered function
+	 *  @param {object} oData Datatype object to pass to the triggered function
 	 *  @param {function} fn Callback function for when the event is triggered
 	 *  @memberof DataTable#oApi
 	 */
@@ -6651,7 +6651,7 @@
 	 * a little (ajax) and to make it compress a little smaller.
 	 *
 	 *  @param {object} settings dataTables settings object
-	 *  @returns {string} Data source
+	 *  @returns {string} Datatype source
 	 *  @memberof DataTable#oApi
 	 */
 	function _fnDataSource ( settings )
@@ -6817,7 +6817,7 @@
 	 *   * `node` - `TABLE` node which has already been formed into a DataTable.
 	 *   * `jQuery` - A jQuery object of `TABLE` nodes.
 	 *   * `object` - DataTables settings object
-	 * @param {array} [data] Data to initialise the Api instance with.
+	 * @param {array} [data] Datatype to initialise the Api instance with.
 	 *
 	 * @example
 	 *   // Direct initialisation during DataTables construction
@@ -7443,7 +7443,7 @@
 	 *    + length = end`, but this is not always true, for example if there are
 	 *    only 2 records to show on the final page, with a length of 10.
 	 *  * `recordsTotal` - Full data set length
-	 *  * `recordsDisplay` - Data set length once the current filtering criterion
+	 *  * `recordsDisplay` - Datatype set length once the current filtering criterion
 	 *    are applied.
 	 */
 	_api_register( 'page.info()', function ( action ) {
@@ -9457,7 +9457,7 @@
 		"anCells": null,
 	
 		/**
-		 * Data object from the original data source for the row. This is either
+		 * Datatype object from the original data source for the row. This is either
 		 * an array if using the traditional form of DataTables, or an object if
 		 * using mData options. The exact type will depend on the passed in
 		 * data from the data source, or will be an array if using DOM a data
@@ -9618,7 +9618,7 @@
 		 * element is available.
 		 *  @type function
 		 *  @param {element} nTd The TD node that has been created
-		 *  @param {*} sData The Data for the cell
+		 *  @param {*} sData The Datatype for the cell
 		 *  @param {array|object} oData The data for the whole row
 		 *  @param {int} iRow The row index for the aoData data store
 		 *  @default null
@@ -9978,7 +9978,7 @@
 		 * The function is given four parameters and no return is required. The
 		 * parameters are:
 		 *
-		 * 1. _object_ - Data to send to the server
+		 * 1. _object_ - Datatype to send to the server
 		 * 2. _function_ - Callback function that must be executed when the required
 		 *    data has been obtained. That data should be passed into the callback
 		 *    as the only parameter
@@ -10852,7 +10852,7 @@
 		 * passed in parameter is the data set that has been constructed by
 		 * DataTables, and you can add to this or modify it as you require.
 		 *  @type function
-		 *  @param {array} data Data array (array of objects which are name/value
+		 *  @param {array} data Datatype array (array of objects which are name/value
 		 *    pairs) that has been constructed by DataTables and will be sent to the
 		 *    server. In the case of Ajax sourced data with server-side processing
 		 *    this will be an empty array, for server-side processing there will be a
@@ -12185,7 +12185,7 @@
 		 * element is available.
 		 *  @type function
 		 *  @param {element} td The TD node that has been created
-		 *  @param {*} cellData The Data for the cell
+		 *  @param {*} cellData The Datatype for the cell
 		 *  @param {array|object} rowData The data for the whole row
 		 *  @param {int} row The row index for the aoData data store
 		 *  @param {int} col The column index for aoColumns
@@ -12265,7 +12265,7 @@
 		 *        setting data or 'filter', 'display', 'type', 'sort' or undefined
 		 *        when gathering data. Note that when `undefined` is given for the
 		 *        type DataTables expects to get the raw data for the object back<
-		 *      * `{*}` Data to set when the second parameter is 'set'.
+		 *      * `{*}` Datatype to set when the second parameter is 'set'.
 		 *    * Return:
 		 *      * The return value from the function is not required when 'set' is
 		 *        the type of call, but otherwise the return is what will be used
@@ -13495,7 +13495,7 @@
 		"json": undefined,
 	
 		/**
-		 * Data submitted as part of the last Ajax request
+		 * Datatype submitted as part of the last Ajax request
 		 *  @type object
 		 *  @default undefined
 		 */
@@ -13764,7 +13764,7 @@
 		"rowIdFn": null,
 	
 		/**
-		 * Data location where to store a row's id
+		 * Datatype location where to store a row's id
 		 *  @type string
 		 *  @default null
 		 */
@@ -13891,7 +13891,7 @@
 		 *
 		 * 1. `{object}` DataTables settings object: see
 		 *    {@link DataTable.models.oSettings}
-		 * 2. `{array|object}` Data for the row to be processed (same as the
+		 * 2. `{array|object}` Datatype for the row to be processed (same as the
 		 *    original format that was passed in as the data source, or an array
 		 *    from a DOM data source
 		 * 3. `{int}` Row index ({@link DataTable.models.oSettings.aoData}), which
@@ -14081,7 +14081,7 @@
 		 *
 		 * Each function is expected to return an array:
 		 *
-		 * * `{array}` Data for the column to be ordering upon
+		 * * `{array}` Datatype for the column to be ordering upon
 		 *
 		 *  @type array
 		 *
@@ -14117,7 +14117,7 @@
 			 *
 			 * The functions defined take two parameters:
 			 *
-		     *  1. `{*}` Data from the column cell to be analysed
+		     *  1. `{*}` Datatype from the column cell to be analysed
 		     *  2. `{settings}` DataTables settings object. This can be used to
 		     *     perform context specific type detection - for example detection
 		     *     based on language settings such as using a comma for a decimal
@@ -14126,7 +14126,7 @@
 			 *
 			 * Each function is expected to return:
 			 *
-			 * * `{string|null}` Data type detected, or null if unknown (and thus
+			 * * `{string|null}` Datatype type detected, or null if unknown (and thus
 			 *   pass it on to the other type detection functions.
 			 *
 			 *  @type array
@@ -14173,7 +14173,7 @@
 			 *
 			 * The functions defined take a single parameter:
 			 *
-		     *  1. `{*}` Data from the column cell to be prepared for searching
+		     *  1. `{*}` Datatype from the column cell to be prepared for searching
 			 *
 			 * Each function is expected to return:
 			 *
@@ -14212,17 +14212,17 @@
 			 *
 			 * `{type}-pre`: Functions defined take a single parameter:
 			 *
-		     *  1. `{*}` Data from the column cell to be prepared for ordering
+		     *  1. `{*}` Datatype from the column cell to be prepared for ordering
 			 *
 			 * And return:
 			 *
-			 * * `{*}` Data to be sorted upon
+			 * * `{*}` Datatype to be sorted upon
 			 *
 			 * `{type}-asc` and `{type}-desc`: Functions are typical Javascript sort
 			 * functions, taking two parameters:
 			 *
-		     *  1. `{*}` Data to compare to the second parameter
-		     *  2. `{*}` Data to compare to the first parameter
+		     *  1. `{*}` Datatype to compare to the second parameter
+		     *  2. `{*}` Datatype to compare to the first parameter
 			 *
 			 * And returning:
 			 *

@@ -11,7 +11,7 @@ class Reading extends Model
     use Notifiable;
 
     public function leafnode(){
-        return $this->belongsTo('SensorWeb\Model\Leafnode');
+        return $this->belongsTo('SensorWeb\Models\Leafnode');
     }
 
     public function homenode(){
@@ -19,6 +19,6 @@ class Reading extends Model
     }
 
     public function datatype(){
-        return $this->hasOne('SensorWeb\Model\Datatype');
+        return $this->belongsTo('SensorWeb\Models\Datatype');
     }
 }

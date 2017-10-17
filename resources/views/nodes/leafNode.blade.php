@@ -66,9 +66,9 @@
                             <tr>
 
                                 <td>{{$reading->id}}</td>
-                                <td>TODO</td>
-                                <td>{{$leafnode->latitude}}{{$leafnode->longitude}}</td>
-                                <td>TODO</td>
+                                <td>{{$reading->datatype->title}} ({{$reading->datatype->abbreviation}})</td>
+                                <td>{{$reading->value}}</td>
+                                <td>{{$reading->created_at}}</td>
                                 <td>
                                     <a href="#" title="Delete Data" data-toggle="modal" data-target="#deleteModal" onclick="deleteId('{{ route('removeReading', $reading->id) }}')"><i class="fa fa-trash fa-2x" ></i></a>
                                 </td>

@@ -9,7 +9,7 @@
 
 @extends('layouts.layout')
 
-@section('title', 'Data Settings')
+@section('title', 'Datatype')
 
 @section('content')
     <div class="row">
