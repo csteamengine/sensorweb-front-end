@@ -51,7 +51,7 @@ class UserController extends BaseController
         $updateUser->first_name = $request->first_name;
         $updateUser->last_name = $request->last_name;
         $updateUser->address_line1 = $request->address_line1;
-        $updateUser->address_line1 = $request->address_line2;
+        $updateUser->address_line2 = $request->address_line2;
         $updateUser->city = $request->city;
         $updateUser->state = $request->state;
         $updateUser->zip = $request->zip;
