@@ -29,10 +29,12 @@ class HomeController extends Controller
         $homenode = $homenodes[0];
 
         $leafnodes = $user->leafnodes();
-        $firstNodeReadings = $homenode->readings();
+        $firstNodeReadings = $homenode->leafnodes()->first()->readings()->get();
+
+        $firstNodeAvg = $homenode->avgReadings();
 
         $readings = $user->readings();
-        return view('home', ['homenodes' => $homenodes, 'leafnodes' => $leafnodes, 'readings' => $readings, 'user' => $user, 'firstNodeReadings' => $firstNodeReadings]);
+        return view('home', ['homenodes' => $homenodes, 'leafnodes' => $leafnodes, 'readings' => $readings, 'user' => $user, 'firstNodeReadings' => $firstNodeReadings, 'firstNodeAvg' => $firstNodeAvg]);
     }
 
     public function analysis(){

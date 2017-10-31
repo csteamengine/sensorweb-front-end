@@ -29,4 +29,29 @@ class Homenode extends Model
 
         return $readings;
     }
+
+    public function avgReadings(){
+        $readings = $this->readings();
+        $storage = array();
+
+        foreach($readings as $reading){
+
+            if(array_key_exists("".$reading->created_at, $storage)){
+                array_push($storage["".$reading->created_at], $reading->value);
+            }else{
+                $storage["". $reading->created_at] = array();
+                array_push($storage["".$reading->created_at], $reading->value);
+            }
+        }
+
+        $results = array();
+        foreach($storage as $key => $slot){
+            $sum = 0;
+            foreach($slot as $index){
+                $sum += $index;
+            }
+            $results[$key] = round($sum/sizeof($slot), 2);
+        }
+        return $results;
+    }
 }

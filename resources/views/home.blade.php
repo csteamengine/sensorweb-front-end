@@ -285,23 +285,18 @@
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
             var data = new google.visualization.DataTable();
-            var moistureReadings = [
-                    @foreach($firstNodeReadings as $reading)
-                [{{strtotime($reading->created_at) * 1000}},{{$reading->value}}],
-                @endforeach
-            ];
             data.addColumn('date', 'X');
             data.addColumn('number', 'Units');
 
             data.addRows([
-                @foreach($firstNodeReadings as $reading)
-                    [new Date(  getDate("{{$reading->created_at}}")[0],
-                                getDate("{{$reading->created_at}}")[1]-1,
-                                getDate("{{$reading->created_at}}")[2],
-                                getDate("{{$reading->created_at}}")[3],
-                                getDate("{{$reading->created_at}}")[4],
-                                getDate("{{$reading->created_at}}")[5])
-                    ,{{$reading->value}}],
+                @foreach($firstNodeAvg as $key => $reading)
+                    [new Date(  getDate("{{$key}}")[0],
+                                getDate("{{$key}}")[1]-1,
+                                getDate("{{$key}}")[2],
+                                getDate("{{$key}}")[3],
+                                getDate("{{$key}}")[4],
+                                getDate("{{$key}}")[5])
+                    ,{{$reading}}],
                 @endforeach
             ]);
 
