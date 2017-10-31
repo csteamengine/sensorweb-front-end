@@ -109,93 +109,155 @@
         </div>
     </div>
 </div>
-{{--<!-- /.row -->
 <div class="row">
-    <div class="col-lg-8">
+    <!-- /.col-lg-6 -->
+    <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i> Field 1 Moisture Levels
-                <div class="pull-right">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                            Actions
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu pull-right" role="menu">
-                            <li><a href="#">Action</a>
-                            </li>
-                            <li><a href="#">Another action</a>
-                            </li>
-                            <li><a href="#">Something else here</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                First Home Node Moisture
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <div id="morris-area-chart"></div>
+                <div class="flot-chart">
+                    <div class="flot-chart-content" id="flot-line-chart-multi"></div>
+                </div>
             </div>
             <!-- /.panel-body -->
         </div>
         <!-- /.panel -->
     </div>
-    <!-- /.col-lg-8 -->
-    <div class="col-lg-4">
+    <!-- /.col-lg-6 -->
+    <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-bell fa-fw"></i> Notifications Panel
+                Average Moisture
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <div class="list-group">
-                    <a href="#" class="list-group-item">
-                        <i class="fa fa-comment fa-fw"></i> New data analysis completed
-                        <span class="pull-right text-muted small"><em>4 minutes ago</em>
-                                    </span>
-                    </a>
-                    <a href="#" class="list-group-item">
-                        <i class="fa fa-twitter fa-fw"></i> Home node not responding
-                        <span class="pull-right text-muted small"><em>12 minutes ago</em>
-                                    </span>
-                    </a>
-                    <a href="#" class="list-group-item">
-                        <i class="fa fa-envelope fa-fw"></i> Confirmed leaf node loss
-                        <span class="pull-right text-muted small"><em>27 minutes ago</em>
-                                    </span>
-                    </a>
-                    <a href="#" class="list-group-item">
-                        <i class="fa fa-tasks fa-fw"></i> Leaf Node not responding
-                        <span class="pull-right text-muted small"><em>43 minutes ago</em>
-                                    </span>
-                    </a>
-                    <a href="#" class="list-group-item">
-                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                        <span class="pull-right text-muted small"><em>11:32 AM</em>
-                                    </span>
-                    </a>
-                    <a href="#" class="list-group-item">
-                        <i class="fa fa-bolt fa-fw"></i> Server Crashed!
-                        <span class="pull-right text-muted small"><em>11:13 AM</em>
-                                    </span>
-                    </a>
-                    <a href="#" class="list-group-item">
-                        <i class="fa fa-warning fa-fw"></i> Server Not Responding
-                        <span class="pull-right text-muted small"><em>10:57 AM</em>
-                                    </span>
-                    </a>
+                <div class="flot-chart">
+                    <div class="flot-chart-content" id="flot-bar-chart"></div>
                 </div>
-                <!-- /.list-group -->
-                <a href="#" class="btn btn-default btn-block">View All Alerts</a>
             </div>
             <!-- /.panel-body -->
         </div>
         <!-- /.panel -->
     </div>
-    <!-- /.col-lg-4 -->
+
 </div>
-<!-- /.row -->--}}
+
+@endsection
+
+@section("includes")
+    <script>
+        $(window).on('load', function(){
+            var moistureReadings = [
+                @foreach($firstNodeReadings as $reading)
+                    [{{strtotime($reading->created_at) * 1000}},{{$reading->value}}],
+                @endforeach
+            ];
+
+            function euroFormatter(v, axis) {
+                return v.toFixed(axis.tickDecimals) + "€";
+            }
+
+            function doPlot(position) {
+                $.plot($("#flot-line-chart-multi"), [{
+                    data: moistureReadings,
+                    label: "Moisture Level"
+                }], {
+                    xaxes: [{
+                        mode: 'time'
+                    }],
+                    yaxes: [{
+                        min: 0
+                    }, {
+                        // align if we are to the right
+                        alignTicksWithAxis: position == "right" ? 1 : null,
+                        position: position,
+                        tickFormatter: euroFormatter
+                    }],
+                    legend: {
+                        position: 'sw'
+                    },
+                    grid: {
+                        hoverable: true //IMPORTANT! this is needed for tooltip to work
+                    },
+                    tooltip: true,
+                    tooltipOpts: {
+                        content: "%s for %x was %y",
+                        xDateFormat: "%y-%0m-%0d",
+
+                        onHover: function(flotItem, $tooltipEl) {
+                            // console.log(flotItem, $tooltipEl);
+                        }
+                    }
+
+                });
+            }
+            //Flot Bar Chart
+
+            $(function() {
+
+                var barOptions = {
+                    series: {
+                        bars: {
+                            show: true,
+                            barWidth: 1,
+                            align: "center"
+                        }
+                    },
+                    xaxis: {
+                        ticks: [
+                            <?php $count = 0; ?>
+                            @foreach($homenodes as $homenode)
+                            [{{$count}}, "{{$homenode->pivot->nickname}}"],
+                            <?php $count++ ?>
+                            @endforeach
+
+                        ]
+                    },
+                    grid: {
+                        hoverable: true
+                    },
+                    legend: {
+                        show: false
+                    },
+                    tooltip: true,
+                    tooltipOpts: {
+                        content: "x: %x, y: %y"
+                    }
+                };
+                var barData = {
+                    label: "bar",
+                    data: [
+                        <?php  $count = 0; ?>
+                        @foreach($homenodes as $homenode)
+                            <?php
+                                $readings = $homenode->readings();
+                                $total = 0.00;
+                                foreach($readings as $reading){
+                                    $total += $reading->value;
+                                }
+                                $average = $total/sizeof($readings);
+                            ?>
+                            [{{$count}}, {{$average}}],
+                            <?php $count++; ?>
+                        @endforeach
+
+                    ]
+                };
+                $.plot($("#flot-bar-chart"), [barData], barOptions);
+
+            });
+
+            doPlot("right");
+        });
+    </script>
+    <script src="/js/vendor/flot/excanvas.min.js"></script>
+    <script src="/js/vendor/flot/jquery.flot.js"></script>
+    <script src="/js/vendor/flot/jquery.flot.pie.js"></script>
+    <script src="/js/vendor/flot/jquery.flot.resize.js"></script>
+    <script src="/js/vendor/flot/jquery.flot.categories.js"></script>
+    <script src="/js/vendor/flot/jquery.flot.time.js"></script>
+    <script src="/js/vendor/flot-tooltip/jquery.flot.tooltip.min.js"></script>
 @endsection

@@ -16,4 +16,17 @@ class Homenode extends Model
     public function leafnodes(){
         return $this->hasMany('SensorWeb\Models\Leafnode');
     }
+
+    public function readings(){
+        $leafnodes = $this->leafnodes()->get();
+        $readings = array();
+
+        foreach($leafnodes as $leafnode){
+            foreach($leafnode->readings()->get() as $reading){
+                array_push($readings, $reading);
+            }
+        }
+
+        return $readings;
+    }
 }

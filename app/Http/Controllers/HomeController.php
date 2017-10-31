@@ -25,9 +25,14 @@ class HomeController extends Controller
     public function home(){
         $user = Auth::user();
         $homenodes = $user->homenodes()->get();
+
+        $homenode = $homenodes[0];
+
         $leafnodes = $user->leafnodes();
+        $firstNodeReadings = $homenode->readings();
+
         $readings = $user->readings();
-        return view('home', ['homenodes' => $homenodes, 'leafnodes' => $leafnodes, 'readings' => $readings, 'user' => $user]);
+        return view('home', ['homenodes' => $homenodes, 'leafnodes' => $leafnodes, 'readings' => $readings, 'user' => $user, 'firstNodeReadings' => $firstNodeReadings]);
     }
 
     public function analysis(){

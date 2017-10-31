@@ -15512,7 +15512,7 @@ if (token) {
     /**
      * Creates a compiled template function that can interpolate data properties
      * in "interpolate" delimiters, HTML-escape interpolated data properties in
-     * "escape" delimiters, and execute JavaScript in "evaluate" delimiters. Datatype
+     * "escape" delimiters, and execute JavaScript in "evaluate" delimiters. Data
      * properties may be accessed as free variables in the template. If a setting
      * object is given, it takes precedence over `_.templateSettings` values.
      *
@@ -22305,7 +22305,7 @@ jQuery.fn.extend( {
 			if ( elem && value === undefined ) {
 
 				// Attempt to get data from the cache
-				// The key will always be camelCased in Datatype
+				// The key will always be camelCased in Data
 				data = dataUser.get( elem, key );
 				if ( data !== undefined ) {
 					return data;
@@ -23873,13 +23873,13 @@ jQuery.extend( {
 					}
 
 					// Support: Chrome <=35 - 45+
-					// Assign undefined instead of using delete, see Datatype#remove
+					// Assign undefined instead of using delete, see Data#remove
 					elem[ dataPriv.expando ] = undefined;
 				}
 				if ( elem[ dataUser.expando ] ) {
 
 					// Support: Chrome <=35 - 45+
-					// Assign undefined instead of using delete, see Datatype#remove
+					// Assign undefined instead of using delete, see Data#remove
 					elem[ dataUser.expando ] = undefined;
 				}
 			}
@@ -26805,7 +26805,7 @@ jQuery.extend( {
 			json: "responseJSON"
 		},
 
-		// Datatype converters
+		// Data converters
 		// Keys separate source (or catchall "*") and destination types with a single space
 		converters: {
 
@@ -32814,7 +32814,7 @@ function mergeData (to, from) {
 }
 
 /**
- * Datatype
+ * Data
  */
 function mergeDataOrFn (
   parentVal,
