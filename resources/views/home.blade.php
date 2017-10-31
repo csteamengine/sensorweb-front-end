@@ -142,7 +142,21 @@
         </div>
         <!-- /.panel -->
     </div>
-
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                First Home Node Moisture
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div id="chart_div"></div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
 </div>
 
 @endsection
@@ -152,7 +166,12 @@
         $(window).on('load', function(){
             var moistureReadings = [
                 @foreach($firstNodeReadings as $reading)
-                    [{{strtotime($reading->created_at) * 1000}},{{$reading->value}}],
+                    [new Date(  getDate("{{$reading->created_at}}")[0],
+                    getDate("{{$reading->created_at}}")[1]-1,
+                    getDate("{{$reading->created_at}}")[2],
+                    getDate("{{$reading->created_at}}")[3],
+                    getDate("{{$reading->created_at}}")[4],
+                    getDate("{{$reading->created_at}}")[5]),{{$reading->value}}],
                 @endforeach
             ];
 
@@ -260,4 +279,51 @@
     <script src="/js/vendor/flot/jquery.flot.categories.js"></script>
     <script src="/js/vendor/flot/jquery.flot.time.js"></script>
     <script src="/js/vendor/flot-tooltip/jquery.flot.tooltip.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {packages: ['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            var moistureReadings = [
+                    @foreach($firstNodeReadings as $reading)
+                [{{strtotime($reading->created_at) * 1000}},{{$reading->value}}],
+                @endforeach
+            ];
+            data.addColumn('date', 'X');
+            data.addColumn('number', 'Units');
+
+            data.addRows([
+                @foreach($firstNodeReadings as $reading)
+                    [new Date(  getDate("{{$reading->created_at}}")[0],
+                                getDate("{{$reading->created_at}}")[1]-1,
+                                getDate("{{$reading->created_at}}")[2],
+                                getDate("{{$reading->created_at}}")[3],
+                                getDate("{{$reading->created_at}}")[4],
+                                getDate("{{$reading->created_at}}")[5])
+                    ,{{$reading->value}}],
+                @endforeach
+            ]);
+
+            var options = {
+                hAxis: {
+                    title: 'Time'
+                },
+                vAxis: {
+                    title: 'Moisture Level'
+                },
+                height: 500,
+                title: "Homenode Moisture Readings",
+                is3D: true
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+
+            chart.draw(data, options);
+        }
+
+        function getDate(date){
+            return date.split(/[- :]/);
+        }
+    </script>
 @endsection
