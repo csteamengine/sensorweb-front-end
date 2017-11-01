@@ -29,7 +29,8 @@ class HomeController extends Controller
         $homenode = $homenodes[0];
 
         $leafnodes = $user->leafnodes();
-        $firstNodeReadings = $homenode->leafnodes()->first()->readings()->get();
+        $firstNodeReadings = $homenode->leafnodes()->first()->getReadingsArray();
+
 
         $firstNodeAvg = $homenode->avgReadings();
 

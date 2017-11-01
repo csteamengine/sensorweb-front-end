@@ -36,4 +36,14 @@ class Leafnode extends Model
         return $this->hasMany('SensorWeb\Models\Reading');
     }
 
+    public function getReadingsArray(){
+        $readings = $this->readings()->get();
+        $array = array();
+        foreach($readings as $reading){
+            $array["".$reading->created_at] = $reading->value;
+        }
+        ksort($array);
+        return $array;
+    }
+
 }

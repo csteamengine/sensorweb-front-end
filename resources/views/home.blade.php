@@ -165,13 +165,13 @@
     <script>
         $(window).on('load', function(){
             var moistureReadings = [
-                @foreach($firstNodeReadings as $reading)
-                    [new Date(  getDate("{{$reading->created_at}}")[0],
-                    getDate("{{$reading->created_at}}")[1]-1,
-                    getDate("{{$reading->created_at}}")[2],
-                    getDate("{{$reading->created_at}}")[3],
-                    getDate("{{$reading->created_at}}")[4],
-                    getDate("{{$reading->created_at}}")[5]),{{$reading->value}}],
+                @foreach($firstNodeReadings as $key => $reading)
+                    [new Date(  getDate("{{$key}}")[0],
+                    getDate("{{$key}}")[1]-1,
+                    getDate("{{$key}}")[2],
+                    getDate("{{$key}}")[3],
+                    getDate("{{$key}}")[4],
+                    getDate("{{$key}}")[5]),{{$reading}}],
                 @endforeach
             ];
 

@@ -52,6 +52,7 @@ class Homenode extends Model
             }
             $results[$key] = round($sum/sizeof($slot), 2);
         }
+        ksort($results);
         return $results;
     }
 }
