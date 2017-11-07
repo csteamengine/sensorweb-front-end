@@ -34,7 +34,13 @@ class NodeController extends BaseController
         $homenode = $user->homenodes()->find($id);
         if($homenode){
             $leafnodes = $homenode->leafnodes()->get();
-            return view('nodes/homeNode', ['homenode' => $homenode, 'leafnodes' => $leafnodes, 'user' => $user]);
+            for($i = 0; $i < sizeof($leafnodes); $i++){
+                $readings = $leafnodes[$i]->readings()->get();
+                $last = $readings[sizeof($readings)-1];
+                $leafnodes[$i]->last_transmission = $last->created_at;
+            }
+            $averageReadings = $homenode->leafnodes()->first()->getReadingsArray();
+            return view('nodes/homeNode', ['homenode' => $homenode, 'leafnodes' => $leafnodes, 'user' => $user, 'averageReadings' => $averageReadings]);
         }else{
             $homenodes = $user->homenodes()->get();
             array_push($errors, 'You do not have access to that Home Node');

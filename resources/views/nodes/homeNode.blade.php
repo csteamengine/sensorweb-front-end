@@ -65,9 +65,9 @@
 
                                     <td align="center">{{$leafnode->id}}</td>
                                     <td align="center">{{$leafnode->latitude}}{{$leafnode->longitude}}</td>
-                                    <td align="center">TODO</td>
+                                    <td align="center">{{$leafnode->last_transmission}}</td>
                                     <td align="center">
-                                        <a href="{{route('getLeafnodeData', ['id' => $leafnode->homenode->id])}}" title="View Leaf Node Data"><i class="fa fa-bar-chart fa-2x" ></i></a>
+                                        <a href="{{route('getLeafnodeData', ['id' => $leafnode->id])}}" title="View Leaf Node Data"><i class="fa fa-bar-chart fa-2x" ></i></a>
                                     </td>
                                 </tr>
 
@@ -130,6 +130,21 @@
             </form>
         </div>
     </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Average Moisture
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div id="chart_div"></div>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+    </div>
     <!-- Delete Modal -->
     <div id="deleteModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -166,4 +181,46 @@
     <script src="/js/nodes.js"></script>
     <script src="/vendor/datatables/js/dataTables.bootstrap.min.js"></script>
     <script src="/vendor/datatables-responsive/dataTables.responsive.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {packages: ['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('date', 'X');
+            data.addColumn('number', 'Units');
+
+            data.addRows([
+                    @foreach($averageReadings as $key => $reading)
+                [new Date(  getDate("{{$key}}")[0],
+                    getDate("{{$key}}")[1]-1,
+                    getDate("{{$key}}")[2],
+                    getDate("{{$key}}")[3],
+                    getDate("{{$key}}")[4],
+                    getDate("{{$key}}")[5])
+                    ,{{$reading}}],
+                @endforeach
+            ]);
+
+            var options = {
+                hAxis: {
+                    title: 'Time'
+                },
+                vAxis: {
+                    title: 'Moisture Level'
+                },
+                height: 500,
+                title: "Homenode Moisture Readings",
+                is3D: true
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+
+            chart.draw(data, options);
+        }
+
+        function getDate(date){
+            return date.split(/[- :]/);
+        }
+    </script>
 @endsection
