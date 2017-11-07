@@ -68,10 +68,10 @@
                                 <td align="center">{{$leafnode->id}}</td>
                                 <td align="center">{{$leafnode->homenode->pivot->nickname != "" ? $leafnode->homenode->pivot->nickname : "<No Nickname>"}}</td>
                                 <td align="center">{{$leafnode->latitude}}{{$leafnode->longitude}}</td>
-                                <td align="center">TODO</td>
+                                <td align="center">{{$leafnode->created_at}}</td>
                                 <td align="center">
                                     <a href="{{route('getHomenode', ['id' => $leafnode->homenode->id])}}" title="Go to Home Node"><i class="fa fa-home fa-2x" ></i></a>
-                                    <a href="{{route('getLeafnodeData', ['id' => $leafnode->homenode->id])}}" title="View Leaf Node Data"><i class="fa fa-bar-chart fa-2x" ></i></a>
+                                    <a href="{{route('getLeafnodeData', ['id' => $leafnode->id])}}" title="View Leaf Node Data"><i class="fa fa-bar-chart fa-2x" ></i></a>
                                 </td>
                             </tr>
 

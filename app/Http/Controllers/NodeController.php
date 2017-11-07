@@ -58,7 +58,8 @@ class NodeController extends BaseController
             }
         }
         if($found){
-            $readings = $leafnode->readings()->with('datatype')->get();
+            $readings = $leafnode->readings()->with('datatype')->orderBy("created_at")->get();
+
             return view('nodes/leafNode', ['leafnode' => $leafnode, 'readings' => $readings, 'user' => $user]);
         }else{
             $leafnodes = $user->leafnodes()->get();
