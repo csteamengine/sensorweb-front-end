@@ -94,15 +94,15 @@
             {{ Form::close() }}
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Settings</h1>
-        </div>
-        <!-- /.col-lg-12 -->
-    </div>
-    <div class="row">
-        <div class="col-md-12" align="center">
-            <h3>TODO - will add settings here</h3>
-        </div>
-    </div>
+    {{--<div class="row">--}}
+        {{--<div class="col-lg-12">--}}
+            {{--<h1 class="page-header">Settings</h1>--}}
+        {{--</div>--}}
+        {{--<!-- /.col-lg-12 -->--}}
+    {{--</div>--}}
+    {{--<div class="row">--}}
+        {{--<div class="col-md-12" align="center">--}}
+            {{--<h3>TODO - will add settings here</h3>--}}
+        {{--</div>--}}
+    {{--</div>--}}
 @endsection

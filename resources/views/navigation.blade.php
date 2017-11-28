@@ -56,9 +56,7 @@
                 <li>
                     <a href="/leafNodes"><i class="fa fa-leaf fa-fw"></i> Leaf Nodes</a>
                 </li>
-                <li>
-                    <a href="/analysis"><i class="fa fa-bar-chart fa-fw"></i> Data Analysis</a>
-                </li>
+
             </ul>
         </div>
         <!-- /.sidebar-collapse -->
