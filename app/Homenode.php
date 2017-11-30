@@ -55,4 +55,13 @@ class Homenode extends Model
         ksort($results);
         return $results;
     }
+
+    public function overallAverage(){
+        $averages = $this->avgReadings();
+        $total = 0;
+        foreach($averages as $average){
+            $total += $average;
+        }
+        return $total/sizeof($averages);
+    }
 }

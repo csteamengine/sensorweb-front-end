@@ -26,21 +26,26 @@ class HomeController extends Controller
         $user = Auth::user();
         $homenodes = $user->homenodes()->get();
 
+
         if(sizeof($homenodes) > 0) {
             $homenode = $homenodes[0];
             $leafnodes = $user->leafnodes();
             $firstNodeReadings = $homenode->leafnodes()->first()->getReadingsArray();
 
             $firstNodeAvg = $homenode->avgReadings();
+            $averages = [];
+            foreach($homenodes as $curr){
+                $curr->average = $curr->overallAverage();
+                array_push($averages, $curr);
+            }
         }else{
             $homenode = [];
             $leafnodes = [];
             $firstNodeReadings = [];
             $firstNodeAvg = [];
         }
-
         $readings = $user->readings();
-        return view('home', ['homenodes' => $homenodes, 'leafnodes' => $leafnodes, 'readings' => $readings, 'user' => $user, 'firstNodeReadings' => $firstNodeReadings, 'firstNodeAvg' => $firstNodeAvg]);
+        return view('home', ['averages' => $averages, 'homenodes' => $homenodes, 'leafnodes' => $leafnodes, 'readings' => $readings, 'user' => $user, 'firstNodeReadings' => $firstNodeReadings, 'firstNodeAvg' => $firstNodeAvg]);
     }
 
     public function analysis(){
