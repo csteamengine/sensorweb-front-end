@@ -281,6 +281,17 @@
             doPlot("right");
         });
     </script>
+
+    @endif
+    <script src="/js/vendor/flot/excanvas.min.js"></script>
+    <script src="/js/vendor/flot/jquery.flot.js"></script>
+    <script src="/js/vendor/flot/jquery.flot.pie.js"></script>
+    <script src="/js/vendor/flot/jquery.flot.resize.js"></script>
+    <script src="/js/vendor/flot/jquery.flot.categories.js"></script>
+    <script src="/js/vendor/flot/jquery.flot.time.js"></script>
+    <script src="/js/vendor/flot-tooltip/jquery.flot.tooltip.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    @if(sizeof($homenodes) > 0){
     <script type="text/javascript">
         google.charts.load('current', {packages: ['corechart']});
         google.charts.setOnLoadCallback(drawChart);
@@ -323,13 +334,4 @@
         }
     </script>
     @endif
-    <script src="/js/vendor/flot/excanvas.min.js"></script>
-    <script src="/js/vendor/flot/jquery.flot.js"></script>
-    <script src="/js/vendor/flot/jquery.flot.pie.js"></script>
-    <script src="/js/vendor/flot/jquery.flot.resize.js"></script>
-    <script src="/js/vendor/flot/jquery.flot.categories.js"></script>
-    <script src="/js/vendor/flot/jquery.flot.time.js"></script>
-    <script src="/js/vendor/flot-tooltip/jquery.flot.tooltip.min.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
 @endsection
