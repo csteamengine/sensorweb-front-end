@@ -109,6 +109,7 @@
         </div>
     </div>
 </div>
+@if(sizeof($homenodes) > 0)
 <div class="row">
     <!-- /.col-lg-6 -->
     <div class="col-lg-6">
@@ -158,10 +159,18 @@
         <!-- /.panel -->
     </div>
 </div>
+@else
+    <div class="row">
+        <div class="col-lg-12" align="center">
+            <h1>You don't have any homenodes yet.</h1>
+        </div>
+    </div>
+@endif
 
 @endsection
 
 @section("includes")
+    @if(sizeof($homenodes) > 0)
     <script>
         $(window).on('load', function(){
             var moistureReadings = [
@@ -272,14 +281,6 @@
             doPlot("right");
         });
     </script>
-    <script src="/js/vendor/flot/excanvas.min.js"></script>
-    <script src="/js/vendor/flot/jquery.flot.js"></script>
-    <script src="/js/vendor/flot/jquery.flot.pie.js"></script>
-    <script src="/js/vendor/flot/jquery.flot.resize.js"></script>
-    <script src="/js/vendor/flot/jquery.flot.categories.js"></script>
-    <script src="/js/vendor/flot/jquery.flot.time.js"></script>
-    <script src="/js/vendor/flot-tooltip/jquery.flot.tooltip.min.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         google.charts.load('current', {packages: ['corechart']});
         google.charts.setOnLoadCallback(drawChart);
@@ -289,13 +290,13 @@
             data.addColumn('number', 'Units');
 
             data.addRows([
-                @foreach($firstNodeAvg as $key => $reading)
-                    [new Date(  getDate("{{$key}}")[0],
-                                getDate("{{$key}}")[1]-1,
-                                getDate("{{$key}}")[2],
-                                getDate("{{$key}}")[3],
-                                getDate("{{$key}}")[4],
-                                getDate("{{$key}}")[5])
+                    @foreach($firstNodeAvg as $key => $reading)
+                [new Date(  getDate("{{$key}}")[0],
+                    getDate("{{$key}}")[1]-1,
+                    getDate("{{$key}}")[2],
+                    getDate("{{$key}}")[3],
+                    getDate("{{$key}}")[4],
+                    getDate("{{$key}}")[5])
                     ,{{$reading}}],
                 @endforeach
             ]);
@@ -321,4 +322,14 @@
             return date.split(/[- :]/);
         }
     </script>
+    @endif
+    <script src="/js/vendor/flot/excanvas.min.js"></script>
+    <script src="/js/vendor/flot/jquery.flot.js"></script>
+    <script src="/js/vendor/flot/jquery.flot.pie.js"></script>
+    <script src="/js/vendor/flot/jquery.flot.resize.js"></script>
+    <script src="/js/vendor/flot/jquery.flot.categories.js"></script>
+    <script src="/js/vendor/flot/jquery.flot.time.js"></script>
+    <script src="/js/vendor/flot-tooltip/jquery.flot.tooltip.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 @endsection
